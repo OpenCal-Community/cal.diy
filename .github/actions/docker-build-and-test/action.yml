@@ -61,12 +61,7 @@ runs:
       uses: docker/metadata-action@v5
       with:
         images: |
-          docker.io/calendso/calendso
-          docker.io/calcom/cal.diy
-          ghcr.io/calcom/cal.diy
-        flavor: |
-          latest=${{ !github.event.release.prerelease && inputs.use-as-latest == 'true' }}
-          suffix=${{ inputs.platform-suffix }}
+          ghcr.io/${{ github.repository_owner }}/cal.diy
 
     - name: Copy env
       shell: bash
