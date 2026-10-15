@@ -105,27 +105,6 @@ jobs:
           push-image: ${{ (github.event_name == 'push' || inputs.PUSH_IMAGE) && 'true' || 'false' }}
           use-as-latest: "true"
 
-      - name: Notify Slack on Success
-        if: success() && secrets.CI_SLACK_WEBHOOK_URL != ''
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": ":large_green_circle: Workflow *${{ github.workflow }}* (AMD64) succeeded in job *${{ github.job }}*.\nSee: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
-
-      - name: Notify Slack on Failure
-        if: failure() && secrets.CI_SLACK_WEBHOOK_URL != ''
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": ":red_circle: Workflow *${{ github.workflow }}* (AMD64) failed in job *${{ github.job }}*.\nSee: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
 
   release-arm:
     name: "Release ARM"
@@ -152,25 +131,3 @@ jobs:
           postgres-db: ${{ env.POSTGRES_DB }}
           database-host: ${{ env.DATABASE_HOST }}
           push-image: ${{ (github.event_name == 'push' || inputs.PUSH_IMAGE) && 'true' || 'false' }}
-
-      - name: Notify Slack on Success
-        if: success() && secrets.CI_SLACK_WEBHOOK_URL != ''
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": ":large_green_circle: Workflow *${{ github.workflow }}* (ARM) succeeded in job *${{ github.job }}*.\nSee: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
-
-      - name: Notify Slack on Failure
-        if: failure() && secrets.CI_SLACK_WEBHOOK_URL != ''
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": ":red_circle: Workflow *${{ github.workflow }}* (ARM) failed in job *${{ github.job }}*.\nSee: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
