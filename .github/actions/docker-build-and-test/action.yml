@@ -49,12 +49,20 @@ runs:
         username: ${{ github.actor }}
         password: ${{ inputs.github-token }}
 
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      if: ${{ inputs.push-image == 'true' || github.event_name == 'push' }}
+      with:
+        username: ${{ inputs.dockerhub-username }}
+        password: ${{ inputs.dockerhub-token }}
+
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v5
       with:
         images: |
           ghcr.io/${{ github.repository_owner }}/cal.diy
+          ${{ inputs.dockerhub-username }}/cal.diy
 
     - name: Copy env
       shell: bash
