@@ -110,7 +110,7 @@ export const ANDROID_CHROME_ICON_256 = "/android-chrome-256x256.png";
 export const ROADMAP = "https://cal.com/roadmap";
 export const DESKTOP_APP_LINK = "https://cal.com/download";
 export const POWERED_BY_URL = "https://go.cal.com/booking";
-export const DOCS_URL = "https://cal.com/docs";
+export const DOCS_URL = "https://github.com/OpenCal-Community/cal.diy/wiki";
 export const DEVELOPER_DOCS = "https://developer.cal.com";
 export const SEO_IMG_DEFAULT = `${CAL_URL}/og-image.png`;
 // The Dynamic OG Image is passed through Next's Image API to further optimize it.
@@ -124,12 +124,6 @@ export const IS_STRIPE_ENABLED = !!(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY &&
   process.env.STRIPE_PRIVATE_KEY
 );
-/** This has correct value only server side. When you want to use client side, go for IS_TEAM_BILLING_ENABLED_CLIENT. I think we should use the _CLIENT one only everywhere so that it works reliably everywhere on client as well as server  */
-export const IS_TEAM_BILLING_ENABLED = !!(IS_STRIPE_ENABLED && HOSTED_CAL_FEATURES);
-
-export const IS_TEAM_BILLING_ENABLED_CLIENT =
-  !!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY && HOSTED_CAL_FEATURES;
-
 export const FULL_NAME_LENGTH_MAX_LIMIT = 50;
 export const API_NAME_LENGTH_MAX_LIMIT = 80;
 export const MINUTES_TO_BOOK = process.env.NEXT_PUBLIC_MINUTES_TO_BOOK || "5";
@@ -161,10 +155,6 @@ export const DEFAULT_LIGHT_BRAND_COLOR = "#292929";
 export const DEFAULT_DARK_BRAND_COLOR = "#fafafa";
 
 export const TOP_BANNER_HEIGHT = 40;
-
-export const IS_PREMIUM_USERNAME_ENABLED =
-  (IS_CALCOM || (process.env.NEXT_PUBLIC_IS_E2E && IS_STRIPE_ENABLED)) &&
-  process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE_MONTHLY;
 
 // Max number of invites to join a team/org that can be sent at once
 export const MAX_NB_INVITES = 100;
@@ -231,8 +221,6 @@ export const IS_DUB_REFERRALS_ENABLED =
 
 export const CAL_VIDEO_MEETING_LINK_FOR_TESTING = process.env.CAL_VIDEO_MEETING_LINK_FOR_TESTING;
 
-export const IS_SMS_CREDITS_ENABLED =
-  !!process.env.NEXT_PUBLIC_STRIPE_CREDITS_PRICE_ID || !!process.env.NEXT_PUBLIC_IS_E2E;
 export const DATABASE_CHUNK_SIZE = parseInt(process.env.DATABASE_CHUNK_SIZE || "25", 10);
 
 export const NEXTJS_CACHE_TTL = 3600; // 1 hour
@@ -265,10 +253,6 @@ export const ENV_PAST_BOOKING_RESCHEDULE_CHANGE_TEAM_IDS =
 // Cal Video (Daily) app identifiers
 export const CAL_VIDEO = "daily-video";
 export const CAL_VIDEO_TYPE = "daily_video";
-
-export const ORG_TRIAL_DAYS = process.env.STRIPE_ORG_TRIAL_DAYS
-  ? Math.max(0, parseInt(process.env.STRIPE_ORG_TRIAL_DAYS, 10))
-  : null;
 
 export const IS_API_V2_E2E = process.env.IS_E2E === "true";
 
